@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import logo from "./logo.svg";
+import "./App.css";
+
+function onSubmit(): void {
+  console.log("submit called");
+}
+
+function onChange(params: string | null) {
+  console.log("captcha code called with" + params);
+}
 
 function App() {
+  const recaptchaRef = React.createRef<ReCAPTCHA>();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Learn React
+      <form onSubmit={onSubmit}>
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          sitekey="6Lf_cugUAAAAAPCTqvGyz6b0NbqU1oEjO0FqFsOI"
+          onChange={onChange}
+        />
+      </form>
     </div>
   );
 }
